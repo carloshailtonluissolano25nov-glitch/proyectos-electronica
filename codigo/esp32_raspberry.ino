@@ -1,12 +1,12 @@
 #include <ESP32Servo.h> // Librería necesaria para los ESC de los motores principales
 
-// --- PINES DE LOS MOTORES PRINCIPALES (ESC) ---
+// --- pines de los motores (ESC) ---
 const int PIN_ESC_IZQ = 25;
 const int PIN_ESC_DER = 26;
 Servo escIzq;
 Servo escDer;
 
-// --- PINES DE LA BANDA RECOLECTORA (L298N) ---
+// --- pines de la banda recolectora  (L298N) ---
 const int PIN_BANDA_IN1 = 27;
 const int PIN_BANDA_IN2 = 14;
 const int PIN_BANDA_ENA = 12;
@@ -19,7 +19,7 @@ void setup() {
   // Iniciar comunicación serial con la Raspberry Pi a 115200 baudios
   Serial.begin(115200);
 
-  // 1. CONFIGURACIÓN DE LA BANDA (L298N)
+  // 1. configuracion de la banda(L298N)
   pinMode(PIN_BANDA_IN1, OUTPUT);
   pinMode(PIN_BANDA_IN2, OUTPUT);
   
@@ -30,7 +30,7 @@ void setup() {
   // Asegurarnos de que la banda inicie apagada por seguridad
   detenerBanda();
 
-  // 2. CONFIGURACIÓN DE LOS MOTORES DE PROPULSIÓN (ESC)
+  // 2.configuracion de los motores (ESC)
   escIzq.attach(PIN_ESC_IZQ, 1000, 2000); // Tiempos de pulso estándar para ESC
   escDer.attach(PIN_ESC_DER, 1000, 2000);
   
@@ -42,7 +42,7 @@ void setup() {
 }
 
 void loop() {
-  // --- ESCUCHAR ÓRDENES DE LA RASPBERRY PI ---
+  // --- escuchar ordenes de la raspberry  ---
   // Revisa si han llegado al menos 2 bytes (El comando 'A', 'B' etc., y el byte de potencia)
   if (Serial.available() >= 2) { 
     char comando = Serial.read();
