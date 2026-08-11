@@ -1,3 +1,20 @@
+"""
+=============================================================================
+Control manual web y navegacion autonoma 
+=============================================================================
+Este codigo  implementa el sistema de control principal del vehículo utilizando 
+un servidor web local (Flask) y comunicación serial. 
+
+Características principales:
+1. Interfaz Web (Control Remoto): Levanta una página HTML accesible desde 
+   cualquier dispositivo (ej. celular) en la misma red Wi-Fi para enviar 
+   órdenes manuales de movimiento y control de la banda recolectora.
+2. Comunicación Serial: Traduce los clics de la página web en comandos 
+   de texto y los transmite al ESP32 a través del cable USB.
+3. Base de Control Autónomo: Integra la lógica inicial para tomar 
+   decisiones de navegación basadas en coordenadas GPS y brújula.
+=============================================================================
+"""
 from navegacion import tomar_decision_autonoma
 from flask import Flask, render_template_string
 import serial
@@ -6,7 +23,7 @@ import time
 app = Flask(__name__)
 
 # ==========================================
-# 1. CONEXIÓN CON LA ESP32 POR USB 
+# 1. Conexion con la esp32
 # ==========================================
 esp32 = None
 try:
@@ -19,7 +36,7 @@ except:
     print("ERROR: No se encontró el ESP32. Revisa el cable USB o el puerto.")
 
 # ==========================================
-# 2. PÁGINA WEB PARA EL CELULAR 
+# 2. Pagina web para el celular 
 # ==========================================
 HTML_PAGE = """
 <!DOCTYPE html>
@@ -66,7 +83,7 @@ HTML_PAGE = """
 """
 
 # ==========================================
-# 3. SERVIDOR WEB - RUTAS 
+# 3. Servidor web rutas de acceso
 # ==========================================
 @app.route('/')
 def inicio():
@@ -90,7 +107,7 @@ def ejecutar_comando(cmd):
     return "OK", 200
 
 # ==========================================
-# 4. ARRANQUE DEL SISTEMA (SIMULACRO + SERVIDOR)
+# 4.Arranque del sistema  (SIMULACRO + SERVIDOR)
 # ==========================================
 if __name__ == '__main__':
     print("\n--- 1. INICIANDO PRUEBA DE NAVEGACIÓN AUTÓNOMA ---")
