@@ -1,3 +1,19 @@
+"""
+=============================================================================
+SISTEMA DE NAVEGACIÓN AUTÓNOMA Y CÁLCULO DE TRAYECTORIAS
+=============================================================================
+Este módulo actúa como el cerebro de navegación del vehículo. Utiliza 
+coordenadas GPS actuales y el rumbo de la brújula para calcular la 
+ruta óptima hacia un punto de destino predefinido.
+
+Funciones principales:
+1. calcular_distancia: Usa la fórmula de Haversine para obtener la 
+   distancia exacta en metros sobre la superficie curva de la Tierra.
+2. calcular_angulo: Determina el acimut (rumbo objetivo) de 0° a 360°.
+3. tomar_decision_autonoma: Evalúa la distancia y el error de orientación 
+   para decidir si el vehículo debe avanzar, girar o detenerse al llegar.
+=============================================================================
+"""
 import math
 # (Asegúrate de que aquí estén tus otros imports como flask, serial, etc.)
 
